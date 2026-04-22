@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annas Fikri — Portfolio & Blog</title>
+  <meta name="description" content="Muhammad Annas Fikri — Cybersecurity Student & Developer at USIM">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f; --surface: #111118; --surface2: #16161f; --border: #1e1e2e;
+      --accent: #7fffb0; --accent2: #5de0ff; --text: #e8e8f0; --muted: #6b6b80; --card: #13131c;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: rgba(10,10,15,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 0.05em; }
+    .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+    .nav-links { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 4px; }
+    .nav-btn { background: none; border: none; color: var(--muted); font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 400; padding: 8px 18px; border-radius: 100px; cursor: pointer; transition: all 0.25s ease; }
+    .nav-btn:hover { color: var(--text); }
+    .nav-btn.active { background: var(--accent); color: #0a0a0f; font-weight: 600; }
+
+    .page { display: none; padding-top: 80px; min-height: 100vh; position: relative; z-index: 1; }
+    .page.active { display: block; animation: fadeUp 0.4s ease; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+    .hero { padding: 80px 40px 80px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+    .hero-name { font-family: 'Fraunces', serif; font-size: clamp(42px,5vw,64px); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; color: var(--text); margin-bottom: 16px; }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-role { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 32px; line-height: 1.8; }
+    .hero-bio { font-size: 15px; color: #9898b0; line-height: 1.8; margin-bottom: 36px; max-width: 440px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #0a0a0f; border: none; padding: 12px 24px; border-radius: 100px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(127,255,176,0.25); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: none; color: var(--text); border: 1px solid var(--border); padding: 12px 24px; border-radius: 100px; font-family: 'Outfit', sans-serif; font-size: 13px; text-decoration: none; transition: all 0.2s ease; }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .contact-strip { display: flex; flex-wrap: wrap; gap: 8px; }
+    .contact-chip { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; color: var(--muted); text-decoration: none; font-family: 'DM Mono', monospace; font-size: 11px; transition: all 0.2s; }
+    .contact-chip:hover { transform: translateY(-1px); }
+    .contact-chip.wa:hover { border-color: #25d366; color: #25d366; }
+    .contact-chip.mail:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-chip.li:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    .hero-right { display: flex; flex-direction: column; gap: 16px; }
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: border-color 0.2s; }
+    .stat-card:hover { border-color: rgba(127,255,176,0.3); }
+    .stat-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    .stat-value { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 300; color: var(--accent); line-height: 1; }
+    .stat-desc { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .inner-page { max-width: 1100px; margin: 0 auto; padding: 60px 40px; }
+    .page-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .page-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+    .page-title { font-family: 'Fraunces', serif; font-size: clamp(32px,4vw,52px); font-weight: 300; line-height: 1.1; margin-bottom: 12px; }
+    .page-title span { color: var(--accent); font-style: italic; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 36px; }
+    .meta-badge { font-family: 'DM Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border); color: var(--muted); }
+    .body-text { font-size: 14px; color: #9898b0; line-height: 1.8; margin-bottom: 16px; }
+
+    .tabs { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 4px; width: fit-content; margin-bottom: 32px; }
+    .tab-btn { background: none; border: none; color: var(--muted); font-family: 'Outfit', sans-serif; font-size: 13px; padding: 8px 20px; border-radius: 100px; cursor: pointer; transition: all 0.2s; }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+    .tab-content { display: none; animation: fadeUp 0.3s ease; }
+    .tab-content.active { display: block; }
+
+    .info-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
+    .info-card h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 300; margin-bottom: 20px; color: var(--text); }
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .bullet-list li { font-size: 14px; color: #9898b0; line-height: 1.7; padding-left: 20px; position: relative; }
+    .bullet-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 11px; }
+
+    .role-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 20px; }
+    .role-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; transition: border-color 0.2s; }
+    .role-item:hover { border-color: rgba(127,255,176,0.3); }
+    .role-item h4 { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 8px; font-family: 'DM Mono', monospace; }
+    .role-item p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    .skills-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 20px; }
+    .skill-group h4 { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+    .pill-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { font-family: 'DM Mono', monospace; font-size: 11px; padding: 5px 12px; border-radius: 100px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); }
+
+    .proj-grid { display: flex; flex-direction: column; gap: 24px; }
+    .proj-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px; transition: border-color 0.25s, transform 0.25s; position: relative; overflow: hidden; }
+    .proj-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0; transition: opacity 0.3s; }
+    .proj-card:hover { border-color: rgba(127,255,176,0.25); transform: translateY(-3px); }
+    .proj-card:hover::before { opacity: 1; }
+    .proj-card.featured { border-color: rgba(127,255,176,0.2); background: linear-gradient(135deg,#13131c,#0f1a14); }
+    .proj-featured-badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); background: rgba(127,255,176,0.08); border: 1px solid rgba(127,255,176,0.2); padding: 5px 12px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .proj-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 10px; }
+    .proj-title { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 300; color: var(--text); margin-bottom: 14px; line-height: 1.2; }
+    .proj-desc { font-size: 14px; color: #9898b0; line-height: 1.8; margin-bottom: 20px; }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .tech-chip { font-family: 'DM Mono', monospace; font-size: 10px; padding: 4px 10px; border-radius: 100px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); }
+    .pgus-wrap { margin-top: 24px; }
+    .pgus-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .pgus-label-text { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+    .pgus-score-val { font-family: 'Fraunces', serif; font-size: 20px; color: var(--accent); }
+    .pgus-track { height: 4px; background: var(--border); border-radius: 100px; overflow: hidden; }
+    .pgus-fill { height: 100%; width: 0; background: linear-gradient(90deg,var(--accent),var(--accent2)); border-radius: 100px; transition: width 1.2s ease; }
+
+    .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 2px solid var(--accent); }
+
+    footer { border-top: 1px solid var(--border); padding: 40px; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; position: relative; z-index: 1; }
+    .footer-name { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 300; color: var(--text); margin-bottom: 6px; }
+    .footer-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+    .footer-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .footer-link { font-family: 'DM Mono', monospace; font-size: 11px; padding: 7px 16px; border-radius: 100px; border: 1px solid var(--border); color: var(--muted); text-decoration: none; transition: all 0.2s; }
+    .footer-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-btn { padding: 7px 12px; font-size: 12px; }
+      .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 20px; }
+      .hero-right { display: none; }
+      .inner-page { padding: 40px 20px; }
+      .role-grid { grid-template-columns: 1fr 1fr; }
+      .skills-cols { grid-template-columns: 1fr; }
+      .proj-card { padding: 24px; }
+      footer { padding: 30px 20px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand"><div class="nav-dot"></div>annasfikri.my</div>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="showPage('about', this)">About Me</button>
+      <button class="nav-btn" onclick="showPage('internship', this)">Internship</button>
+      <button class="nav-btn" onclick="showPage('portfolio', this)">Portfolio</button>
+    </div>
+  </nav>
+
+  <!-- ABOUT -->
+  <div id="about" class="page active">
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Portfolio & Blog</div>
+        <img class="profile-img" src="ProfileAnnas.png" alt="Muhammad Annas Fikri">
+        <h1 class="hero-name">Muhammad<br><em>Annas Fikri</em></h1>
+        <div class="hero-role">B.Cs · Information Security & Assurance<br>Universiti Sains Islam Malaysia (USIM)</div>
+        <p class="hero-bio">Hi, I'm a Computer Science graduate from USIM, specializing in Information Security and Assurance. Passionate about cybersecurity, secure web development, and building technology that makes a difference. This site is my digital space to showcase my projects, share my skills, and document my journey.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="Muhammad-Annas-Fikri-Resume.pdf" target="_blank" download>📄 Download Resume</a>
+          <a class="btn-ghost" href="https://github.com/annasfikri003-cyber" target="_blank">↗ GitHub</a>
+        </div>
+        <div class="contact-strip">
+          <a class="contact-chip wa" href="https://wa.me/60123265737" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            +60 12-326 5737
+          </a>
+          <a class="contact-chip mail" href="mailto:annas.fikri003@gmail.com">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            annas.fikri003@gmail.com
+          </a>
+          <a class="contact-chip li" href="https://www.linkedin.com/in/annas-fikri" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Current CGPA</div>
+            <div class="stat-value">3.67</div>
+            <div class="stat-desc">USIM · B.Cs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Certification</div>
+            <div class="stat-value" style="font-size:22px;margin-top:4px;">CySA+</div>
+            <div class="stat-desc">Cybersecurity Analyst</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Published Research</div>
+          <div class="stat-value" style="font-size:20px;margin-top:4px;">InvaFish MY</div>
+          <div class="stat-desc">GIS Mobile App · PGUS Score 80/100 · USIM Journal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Military Rank</div>
+          <div class="stat-value" style="font-size:18px;margin-top:4px;">Leftenan Muda</div>
+          <div class="stat-desc">Angkatan Pertahanan Awam Malaysia (APM)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERNSHIP -->
+  <div id="internship" class="page">
+    <div class="inner-page">
+      <div class="page-eyebrow">My Experience</div>
+      <h2 class="page-title">Internship at<br><span>KLMTECH Technology</span></h2>
+      <div class="meta-row">
+        <span class="meta-badge">💼 Sales & Solution Engineer</span>
+        <span class="meta-badge">📅 March – August 2025</span>
+        <span class="meta-badge">📍 Kulim, Kedah</span>
+      </div>
+      <p class="body-text">This internship allowed me to explore the dynamic world of IT services, networking, and digital marketing. I gained hands-on experience in troubleshooting, website development, customer engagement, and managing marketing campaigns — all while contributing to real client projects.</p>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('overview', this)">Company Overview</button>
+        <button class="tab-btn" onclick="showTab('role', this)">My Role</button>
+        <button class="tab-btn" onclick="showTab('skills', this)">Skills Gained</button>
+      </div>
+      <div id="overview" class="tab-content active">
+        <div class="info-card">
+          <h3>About KLMTECH Technology</h3>
+          <p class="body-text">KLMTECH Technology is an IT solutions provider based in Kulim, Kedah, specializing in end-to-end digital and networking services.</p>
+          <ul class="bullet-list">
+            <li>IT support & troubleshooting for laptops, printers, and PCs</li>
+            <li>TM Unifi registration & network services</li>
+            <li>Website development for businesses</li>
+            <li>Digital marketing and branding support</li>
+          </ul>
+        </div>
+      </div>
+      <div id="role" class="tab-content">
+        <div class="info-card">
+          <h3>My Role & Job Scope</h3>
+          <div class="role-grid">
+            <div class="role-item"><h4>IT Support</h4><p>First-level troubleshooting for laptops, printers, and PCs.</p></div>
+            <div class="role-item"><h4>Network Services</h4><p>TM Unifi registration and customer account setup.</p></div>
+            <div class="role-item"><h4>Website Design</h4><p>Designed & updated business websites using WordPress.</p></div>
+            <div class="role-item"><h4>Marketing</h4><p>TikTok live sessions, ads creation, marketing materials design.</p></div>
+            <div class="role-item"><h4>Market Research</h4><p>Studied customer demographics & target areas for Unifi.</p></div>
+            <div class="role-item"><h4>Client Communication</h4><p>Prepared proposals, attended meetings, explained services.</p></div>
+          </div>
+        </div>
+      </div>
+      <div id="skills" class="tab-content">
+        <div class="info-card">
+          <h3>Skills Gained</h3>
+          <div class="skills-cols">
+            <div class="skill-group">
+              <h4>Technical Skills</h4>
+              <div class="pill-wrap">
+                <span class="pill">IT Troubleshooting</span><span class="pill">WordPress</span><span class="pill">Google Sites</span><span class="pill">TikTok Ads</span><span class="pill">Facebook Ads</span><span class="pill">Email Marketing</span><span class="pill">Proposal Writing</span><span class="pill">Data Collection</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4>Soft Skills</h4>
+              <div class="pill-wrap">
+                <span class="pill">Business Communication</span><span class="pill">Client Management</span><span class="pill">Problem Solving</span><span class="pill">Teamwork</span><span class="pill">Time Management</span><span class="pill">Presentations</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <div id="portfolio" class="page">
+    <div class="inner-page">
+      <div class="page-eyebrow">My Work</div>
+      <h2 class="page-title">Portfolio</h2>
+      <p class="body-text" style="margin-bottom:40px;">Academic and internship projects I've built and contributed to.</p>
+      <div class="proj-grid">
+        <div class="proj-card featured">
+          <div class="proj-featured-badge">⭐ Final Year Project · Published in Academic Journal</div>
+          <div class="proj-num">PROJECT 01</div>
+          <div class="proj-title">InvaFish MY — GIS Mobile Application</div>
+          <p class="proj-desc">A GIS-integrated mobile application for real-time reporting and monitoring of invasive freshwater fish species in Malaysia. Developed using Agile methodology with dual user roles — public citizens and administrators. Features GPS geotagging, photo uploads, and an admin verification dashboard with Multi-Factor Authentication (OTP).</p>
+          <div class="tech-row">
+            <span class="tech-chip">Flutter</span><span class="tech-chip">PHP</span><span class="tech-chip">MySQL</span><span class="tech-chip">GIS</span><span class="tech-chip">Google Maps API</span><span class="tech-chip">Agile</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Real-time GPS geotagging for fish sighting reports</li>
+            <li>Admin dashboard with MFA (OTP) authentication</li>
+            <li>Usability tested with 10 participants using PGUS scale</li>
+            <li>Published: USIM Faculty of Science & Technology, Negeri Sembilan</li>
+          </ul>
+          <div class="pgus-wrap">
+            <div class="pgus-row">
+              <span class="pgus-label-text">PGUS Usability Score</span>
+              <span class="pgus-score-val">80 / 100</span>
+            </div>
+            <div class="pgus-track"><div class="pgus-fill" id="pgusBar"></div></div>
+          </div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-num">PROJECT 02 · Internship</div>
+          <div class="proj-title">Google Business Profile Setup</div>
+          <p class="proj-desc">Set up and optimized Google Business Profile for KLMTECH Technology to improve local search visibility, manage customer reviews, and drive business engagement online.</p>
+          <div class="tech-row">
+            <span class="tech-chip">Google Business Profile</span><span class="tech-chip">SEO</span><span class="tech-chip">Digital Marketing</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Configured business information, hours, and service categories</li>
+            <li>Optimized listing for local SEO and map visibility</li>
+            <li>Managed and responded to customer reviews</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <div class="footer-name">Muhammad Annas Fikri</div>
+      <div class="footer-meta">annas.fikri003@gmail.com · 012 326 5737 · Kuala Berang, Terengganu</div>
+    </div>
+    <div class="footer-links">
+      <a class="footer-link" href="https://www.linkedin.com/in/annas-fikri" target="_blank">LinkedIn</a>
+      <a class="footer-link" href="https://github.com/annasfikri003-cyber" target="_blank">GitHub</a>
+      <a class="footer-link" href="https://wa.me/60123265737" target="_blank">WhatsApp</a>
+      <a class="footer-link" href="mailto:annas.fikri003@gmail.com">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    function showPage(id, btn) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (id === 'portfolio') setTimeout(() => { const b = document.getElementById('pgusBar'); if(b) b.style.width = '80%'; }, 300);
+    }
+    function showTab(id, btn) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>
