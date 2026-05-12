@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annas Fikri — My Blog</title>
+  <meta name="description" content="Muhammad Annas Fikri — Software Engineer, Cybersecurity, Founder of SekuriX">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============================================================
+       Annas Fikri — My Blog | style.css
+       ============================================================ */
+
+    /* ---------- RESET & BASE ---------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #08080f;
+      color: #e2e8f0;
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    strong {
+      color: #c7d2fe;
+      font-weight: 600;
+    }
+
+    /* ---------- NAVBAR ---------- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 40px;
+      background: #0c0c18;
+      border-bottom: 1px solid #1a1a2c;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .nav-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: #64748b;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: #14142a;
+      color: #e2e8f0;
+    }
+
+    .nav-btn.active {
+      background: #1b1b36;
+      color: #818cf8;
+    }
+
+    /* Hamburger (mobile) */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #94a3b8;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ---------- PAGES ---------- */
+    .page {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Inner page wrapper */
+    .inner-page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 36px 40px 60px;
+    }
+
+    /* ---------- SHARED ELEMENTS ---------- */
+    .section-tag {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #818cf8;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .accent-text {
+      color: #818cf8;
+    }
+
+    .para {
+      font-size: 14px;
+      color: #94a3b8;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .bullet-list {
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    .bullet-list li {
+      font-size: 13px;
+      color: #64748b;
+      padding: 4px 0 4px 16px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .bullet-list li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: #6366f1;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    /* ---------- HERO BANNER (About) ---------- */
+    .hero-banner {
+      background: linear-gradient(135deg, #0c0c1e 0%, #160d30 50%, #0c0c1e 100%);
+      padding: 52px 40px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 25% 60%, rgba(99, 102, 241, 0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 40%, rgba(139, 92, 246, 0.12) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: #818cf8;
+      font-weight: 400;
+    }
+
+    /* ---------- ABOUT LAYOUT ---------- */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 40px 60px;
+      align-items: start;
+    }
+
+    /* Profile Card */
+    .profile-card {
+      background: #0d0d1a;
+      border: 1px solid #1a1a2c;
+      border-radius: 14px;
+      padding: 28px 22px;
+      text-align: center;
+    }
+
+    .profile-avatar {
+      width: 84px;
+      height: 84px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      color: #fff;
+      overflow: hidden;
+    }
+    
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+
+    .profile-degree {
+      font-size: 11px;
+      color: #6366f1;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .profile-bio {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .cgpa-badge {
+      background: #1b1b36;
+      border: 1px solid #2a2a50;
+      border-radius: 9px;
+      padding: 10px 14px;
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .cgpa-num {
+      display: block;
+      font-size: 22px;
+      font-weight: 700;
+      color: #818cf8;
+      font-family: 'Syne', sans-serif;
+      margin-top: 2px;
+    }
+
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .social-btn {
+      width: 34px;
+      height: 34px;
+      background: #14142a;
+      border: 1px solid #252540;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      background: #202040;
+      border-color: #6366f1;
+      color: #818cf8;
+    }
+
+    /* Education */
+    .edu-section {
+      margin-top: 4px;
+    }
+
+    .edu-card {
+      background: #0d0d1a;
+      border: 1px solid #1a1a2c;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 10px;
+    }
+
+    .edu-inst {
+      font-size: 13px;
+      font-weight: 600;
+      color: #c7d2fe;
+      margin-bottom: 4px;
+    }
+
+    .edu-deg {
+      font-size: 12px;
+      color: #94a3b8;
+      margin: 4px 0;
+      line-height: 1.5;
+    }
+
+    .edu-date {
+      font-size: 11px;
+      color: #4f46e5;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .edu-gpa {
+      display: inline-block;
+      background: #1b1b36;
+      border-radius: 5px;
+      padding: 2px 10px;
+      font-size: 11px;
+      color: #818cf8;
+    }
+
+    /* About Right */
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+
+    .skill-tag {
+      background: #14142a;
+      border: 1px solid #1e1e38;
+      border-radius: 20px;
+      padding: 4px 13px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .skill-tag.highlight {
+      border-color: #3730a3;
+      color: #a5b4fc;
+      background: #1e1e3f;
+    }
+
+    .resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #6366f1;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 22px;
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+      margin-top: 14px;
+      transition: background 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+
+    .resume-btn:hover {
+      background: #4f46e5;
+      transform: translateY(-2px);
+    }
+
+    .achievements-block,
+    .extracurricular-block {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #14142a;
+    }
+
+    /* ---------- CONTACT SECTION ---------- */
+    .contact-section {
+      margin-top: 36px;
+      padding: 32px;
+      background: linear-gradient(135deg, #0d0d1a, #12103a);
+      border: 1px solid #3730a3;
+      border-radius: 13px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .contact-left h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .contact-desc {
+      font-size: 14px;
+      color: #94a3b8;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      font-size: 18px;
+      color: #818cf8;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .contact-detail {
+      flex: 1;
+    }
+
+    .contact-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #64748b;
+      margin-bottom: 3px;
+    }
+
+    .contact-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: #c7d2fe;
+    }
+
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      background: #25d366;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 9px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+
+    .whatsapp-btn:hover {
+      background: #1faa51;
+      transform: translateY(-2px);
+    }
+
+    .contact-cta {
+      font-size: 12px;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    /* ---------- INTERNSHIP PAGE ---------- */
+    .intern-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 12px 0 20px;
+    }
+
+    .intern-badge {
+      background: #14142a;
+      border: 1px solid #252540;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .intern-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .itab {
+      background: #14142a;
+      border: 1px solid #1e1e38;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .itab:hover,
+    .itab.active {
+      background: #1b1b36;
+      color: #818cf8;
+      border-color: #3730a3;
+    }
+
+    .itab-content {
+      display: none;
+    }
+
+    .itab-content.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    /* Info Box */
+    .info-box {
+      background: #0d0d1a;
+      border: 1px solid #1a1a2c;
+      border-radius: 13px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .info-box h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #c7d2fe;
+      margin-bottom: 14px;
+    }
+
+    .mission-block {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #14142a;
+    }
+
+    .mission-text {
+      font-size: 13px;
+      color: #94a3b8;
+      font-style: italic;
+      margin-top: 6px;
+      line-height: 1.7;
+    }
+
+    /* Role Grid */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .role-card {
+      background: #111120;
+      border: 1px solid #1a1a2c;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .role-card.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .role-card h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #818cf8;
+      margin-bottom: 6px;
+    }
+
+    .role-card p {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.55;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .skill-group h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #818cf8;
+      margin-bottom: 10px;
+    }
+
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-pill {
+      background: #14142a;
+      border: 1px solid #1e1e38;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    /* ---------- PORTFOLIO PAGE ---------- */
+    .portfolio-intro {
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 28px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .project-card {
+      background: #0d0d1a;
+      border: 1px solid #1a1a2c;
+      border-radius: 13px;
+      padding: 22px;
+    }
+
+    .project-card.fyp-card {
+      border-color: #3730a3;
+      background: linear-gradient(135deg, #0d0d1a, #12103a);
+    }
+
+    .fyp-badge {
+      display: inline-block;
+      background: #1b1b36;
+      border: 1px solid #3730a3;
+      border-radius: 6px;
+      padding: 3px 12px;
+      font-size: 10px;
+      color: #818cf8;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .proj-num {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #818cf8;
+      margin-bottom: 5px;
+    }
+
+    .proj-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .tech-tag {
+      background: #1b1b36;
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: #a5b4fc;
+      font-weight: 500;
+    }
+
+    /* PGUS bar */
+    .pgus-wrap {
+      margin-top: 14px;
+    }
+
+    .pgus-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 5px;
+    }
+
+    .pgus-score {
+      color: #818cf8;
+      font-weight: 600;
+    }
+
+    .pgus-bar {
+      background: #14142a;
+      border-radius: 6px;
+      height: 8px;
+    }
+
+    .pgus-fill {
+      background: linear-gradient(90deg, #6366f1, #8b5cf6);
+      height: 8px;
+      border-radius: 6px;
+      width: 80%;
+    }
+
+    .proj-link {
+      color: #818cf8;
+      font-size: 12px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .proj-link:hover {
+      color: #a5b4fc;
+      text-decoration: underline;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: #0c0c18;
+      border-top: 1px solid #1a1a2c;
+      padding: 22px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .footer-info {
+      font-size: 11px;
+      color: #334155;
+      margin-top: 4px;
+    }
+
+    .footer-contact-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .footer-chip {
+      background: #14142a;
+      border: 1px solid #1e1e38;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .footer-chip:hover {
+      border-color: #6366f1;
+      color: #818cf8;
+    }
+
+    /* ---------- BACK TO TOP ---------- */
+    .back-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 40px;
+      height: 40px;
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 99;
+    }
+
+    .back-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-top:hover {
+      background: #4f46e5;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 12px 20px;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 58px;
+        left: 0;
+        right: 0;
+        background: #0c0c18;
+        border-bottom: 1px solid #1a1a2c;
+        padding: 12px 20px;
+        gap: 4px;
+        z-index: 99;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero-banner {
+        padding: 36px 20px 28px;
+      }
+
+      .hero-title {
+        font-size: 26px;
+      }
+
+      .about-layout {
+        grid-template-columns: 1fr;
+        padding: 24px 20px 48px;
+        gap: 24px;
+      }
+
+      .inner-page {
+        padding: 24px 20px 48px;
+      }
+
+      .role-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 24px;
+      }
+
+      footer {
+        padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .role-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 22px;
+      }
+
+      .contact-left h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <div class="nav-logo">A</div>
+      <span>My Blog</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="showPage('about', this)">About Me</button>
+      <button class="nav-btn" onclick="showPage('internship', this)">Internship</button>
+      <button class="nav-btn" onclick="showPage('portfolio', this)">Portfolio</button>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ===================== ABOUT PAGE ===================== -->
+  <div id="about" class="page active">
+
+    <div class="hero-banner">
+      <div class="hero-content">
+        <div class="section-tag">Welcome to My Blog</div>
+        <h1 class="hero-title">Muhammad Annas Fikri</h1>
+        <p class="hero-sub">Software Engineer · Information Security · Founder of SekuriX</p>
+      </div>
+    </div>
+
+    <div class="about-layout">
+
+      <!-- Left column -->
+      <div class="about-left">
+        <div class="profile-card">
+          <div class="profile-avatar"><img src="C:\Users\ANNAS FIKRI\OneDrive - original\Pictures\OFFICIAL IMAGE.jpg" alt="Muhammad Annas Fikri"></div>
+          <div class="profile-name">Muhammad Annas Fikri bin Idrus</div>
+          <div class="profile-degree">B.Cs (Information Security &amp; Assurance)</div>
+          <p class="profile-bio">
+            Hi, I'm Annas Fikri — a cybersecurity-focused software engineer and founder
+            of SekuriX Software Company. Passionate about secure systems, digital
+            innovation, and protecting the web.
+          </p>
+          <div class="cgpa-badge">
+            Current CGPA
+            <span class="cgpa-num">3.67</span>
+          </div>
+          <div class="social-row">
+            <a class="social-btn" href="https://www.linkedin.com/in/annas-fikri" target="_blank" title="LinkedIn">in</a>
+            <a class="social-btn" href="https://github.com/annasfikri003-cyber" target="_blank" title="GitHub">gh</a>
+            <a class="social-btn" href="mailto:annas.fikri003@gmail.com" title="Email">✉</a>
+            <a class="social-btn" href="https://wa.me/60123265737" target="_blank" title="WhatsApp">wa</a>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="edu-section">
+          <div class="section-tag" style="padding: 0 4px; margin-top: 20px;">Education</div>
+          <div class="edu-card">
+            <div class="edu-inst">Universiti Sains Islam Malaysia (USIM)</div>
+            <div class="edu-deg">Bachelor of Computer Science<br>(Information Security and Assurance)</div>
+            <div class="edu-date">Oct 2022 – Present</div>
+            <span class="edu-gpa">CGPA: 3.67</span>
+          </div>
+          <div class="edu-card">
+            <div class="edu-inst">USIM — Tamhidi</div>
+            <div class="edu-deg">Accounting and Muamalat</div>
+            <div class="edu-date">Oct 2021 – Aug 2022</div>
+            <span class="edu-gpa">CGPA: 3.05 · MUET: Band 3.5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="about-right">
+        <div class="section-tag">About Me</div>
+        <h2 class="section-title">Meet Annas Fikri</h2>
+
+        <p class="para">
+          I'm currently pursuing my <strong>Bachelor of Computer Science in Information Security
+          and Assurance</strong> at Universiti Sains Islam Malaysia (USIM), with a current CGPA of 3.67.
+          I have a strong foundation in network security, wireless security, risk assessment (ISO 27005),
+          and secure web programming.
+        </p>
+        <p class="para">
+          I am passionate about learning and problem-solving, and eager to contribute to real-world
+          projects while growing both technically and professionally. My work bridges
+          <strong>software development and cybersecurity</strong> through practical, research-driven
+          projects — including my published Final Year Project, InvaFish MY, a GIS-based mobile
+          application for reporting invasive freshwater fish in Malaysia.
+        </p>
+        <p class="para">
+          I gained hands-on experience at <strong>KLM Digital / KLMTECH Technology</strong> as a
+          Sales &amp; Solution Engineer intern, working on website development, digital marketing,
+          IT support, and client-facing solutions. I am also a ranked
+          <strong>Leftenan Muda in Angkatan Pertahanan Awam Malaysia (APM)</strong>.
+        </p>
+
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Cybersecurity</span>
+          <span class="skill-tag highlight">Secure Web Development</span>
+          <span class="skill-tag highlight">Flutter / Mobile</span>
+          <span class="skill-tag highlight">Blockchain</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">PHP</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">CySA+</span>
+          <span class="skill-tag">ISO 27005</span>
+        </div>
+
+        <a class="resume-btn" href="mailto:annas.fikri003@gmail.com?subject=Resume%20Request">
+          📋 Request My Resume ↗
+        </a>
+
+        <div class="achievements-block">
+          <div class="section-tag">Achievements</div>
+          <ul class="bullet-list">
+            <li>Participated in the CTF Intervarsity Cyber Forensics Challenge</li>
+            <li>Successfully published Final Year Project thesis in an academic journal</li>
+            <li>Awarded the rank of Leftenan Muda in Angkatan Pertahanan Awam Malaysia (APM)</li>
+          </ul>
+        </div>
+
+        <div class="extracurricular-block">
+          <div class="section-tag">Extracurricular</div>
+          <ul class="bullet-list">
+            <li>Active member of Leftenan Muda (APM), participating in training, discipline-based activities, and emergency response programmes</li>
+          </ul>
+        </div>
+
+        <div class="contact-section">
+          <div class="contact-left">
+            <h2>Ready to work together?</h2>
+            <p class="contact-desc">
+              I am actively seeking roles in SOC, IT Security, or Full-Stack Web Development where I can build and defend resilient digital environments.
+            </p>
+            <div class="contact-info">
+              <div class="contact-item">
+                <div class="contact-icon">✉</div>
+                <div class="contact-detail">
+                  <div class="contact-label">Email</div>
+                  <div class="contact-value">annas.fikri003@gmail.com</div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">●</div>
+                <div class="contact-detail">
+                  <div class="contact-label">Status</div>
+                  <div class="contact-value">Available for Opportunities</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-right">
+            <a href="https://wa.me/60123265737" class="whatsapp-btn" target="_blank">Chat on WhatsApp</a>
+            <p class="contact-cta">Direct contact: +60 12-326 5737</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== INTERNSHIP PAGE ===================== -->
+  <div id="internship" class="page">
+    <div class="inner-page">
+
+      <div class="section-tag">My Experience</div>
+      <h2 class="section-title">My Internship at<br><span class="accent-text">KLMTECH Technology</span></h2>
+
+      <div class="intern-meta">
+        <span class="intern-badge">Sales &amp; Solution Engineer</span>
+        <span class="intern-badge">March – August 2025</span>
+        <span class="intern-badge">Kulim, Kedah</span>
+      </div>
+
+      <p class="para">
+        This internship allowed me to explore the dynamic world of IT services, networking,
+        and digital marketing. I gained hands-on experience in troubleshooting, website
+        development, customer engagement, and managing marketing campaigns — all while
+        contributing to real client projects.
+      </p>
+
+      <div class="intern-tabs">
+        <button class="itab active" onclick="showTab('overview', this)">Company Overview</button>
+        <button class="itab" onclick="showTab('role', this)">My Role</button>
+        <button class="itab" onclick="showTab('skills', this)">Skills Gained</button>
+      </div>
+
+      <!-- Tab: Overview -->
+      <div id="overview" class="itab-content active">
+        <div class="info-box">
+          <h3>About KLMTECH Technology</h3>
+          <p class="para" style="margin-bottom: 10px;">
+            KLMTECH Technology is an IT solutions provider based in Kulim, Kedah, specializing in:
+          </p>
+          <ul class="bullet-list">
+            <li>IT support &amp; troubleshooting for laptops, printers, and PCs</li>
+            <li>TM Unifi registration &amp; network services</li>
+            <li>Website development for businesses</li>
+            <li>Digital marketing and branding support</li>
+          </ul>
+          <div class="mission-block">
+            <div class="section-tag">Mission</div>
+            <p class="mission-text">
+              "To deliver efficient, reliable, and customer-focused IT &amp; networking solutions
+              to help businesses grow."
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Role -->
+      <div id="role" class="itab-content">
+        <div class="info-box">
+          <h3>My Role &amp; Job Scope</h3>
+          <div class="role-grid">
+            <div class="role-card">
+              <h4>IT Support</h4>
+              <p>First-level troubleshooting for laptops, printers, and PCs.</p>
+            </div>
+            <div class="role-card">
+              <h4>Network Services</h4>
+              <p>TM Unifi registration and customer account setup.</p>
+            </div>
+            <div class="role-card">
+              <h4>Website Design</h4>
+              <p>Designed &amp; updated business websites using WordPress.</p>
+            </div>
+            <div class="role-card">
+              <h4>Marketing</h4>
+              <p>TikTok live sessions, ads creation, marketing materials design.</p>
+            </div>
+            <div class="role-card">
+              <h4>Market Research</h4>
+              <p>Studied customer demographics &amp; target areas for Unifi.</p>
+            </div>
+            <div class="role-card">
+              <h4>Client Communication</h4>
+              <p>Prepared proposals, attended meetings, explained services.</p>
+            </div>
+          </div>
+          <div class="role-card full-width">
+            <h4>Training &amp; Partner Support</h4>
+            <p>Assisted agents with information, hosted small training sessions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Skills -->
+      <div id="skills" class="itab-content">
+        <div class="info-box">
+          <h3>Skills Gained</h3>
+          <div class="skills-grid">
+            <div class="skill-group">
+              <h4>Technical Skills</h4>
+              <div class="skill-pills">
+                <span class="skill-pill">IT Troubleshooting</span>
+                <span class="skill-pill">WordPress</span>
+                <span class="skill-pill">Google Sites</span>
+                <span class="skill-pill">TikTok Ads</span>
+                <span class="skill-pill">Facebook Ads</span>
+                <span class="skill-pill">Email Marketing</span>
+                <span class="skill-pill">Proposal Writing</span>
+                <span class="skill-pill">Data Collection</span>
+                <span class="skill-pill">Booth Coordination</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4>Soft Skills</h4>
+              <div class="skill-pills">
+                <span class="skill-pill">Business Communication</span>
+                <span class="skill-pill">Client Management</span>
+                <span class="skill-pill">Problem Solving</span>
+                <span class="skill-pill">Teamwork</span>
+                <span class="skill-pill">Time Management</span>
+                <span class="skill-pill">Presentations</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== PORTFOLIO PAGE ===================== -->
+  <div id="portfolio" class="page">
+    <div class="inner-page">
+
+      <div class="section-tag" style="text-align: center;">My Work</div>
+      <h2 class="section-title" style="text-align: center; margin-bottom: 6px;">Portfolio</h2>
+      <p class="portfolio-intro">Academic and internship projects I've worked on.</p>
+
+      <div class="project-grid">
+
+        <!-- FYP -->
+        <div class="project-card fyp-card">
+          <div class="fyp-badge">Final Year Project — Published in Academic Journal</div>
+          <div class="proj-num">Project 01</div>
+          <div class="proj-title">InvaFish MY — GIS Mobile Application</div>
+          <p class="para" style="font-size: 13px;">
+            A GIS-integrated mobile application for real-time reporting and monitoring of
+            invasive freshwater fish species in Malaysia. Developed using Agile methodology.
+            Achieved a PGUS usability score of <strong>80/100 (Good to Excellent)</strong>.
+            Published in an academic journal by USIM Faculty of Science &amp; Technology.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Flutter</span>
+            <span class="tech-tag">PHP</span>
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">GIS</span>
+            <span class="tech-tag">Google Maps API</span>
+            <span class="tech-tag">Agile</span>
+          </div>
+          <ul class="bullet-list" style="margin-top: 10px;">
+            <li>Real-time GPS geotagging for fish sighting reports</li>
+            <li>Dual roles: public users &amp; admin dashboard with MFA (OTP)</li>
+            <li>Usability tested with 10 participants using PGUS scale</li>
+            <li>Published: USIM Faculty of Science &amp; Technology, Negeri Sembilan</li>
+          </ul>
+          <div class="pgus-wrap">
+            <div class="pgus-label">
+              <span>PGUS Usability Score</span>
+              <span class="pgus-score">80 / 100</span>
+            </div>
+            <div class="pgus-bar">
+              <div class="pgus-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card">
+          <div class="proj-num">Project 02 — Internship</div>
+          <div class="proj-title">GOOGLEWEB — Company Website</div>
+          <div class="tech-tags">
+            <span class="tech-tag">WordPress</span>
+            <span class="tech-tag">Google Sites</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Fully developed corporate website for KLMTECH Technology</li>
+            <li>Designed to showcase company services, mission, and contact info</li>
+            <li><a href="https://googleweb.my" target="_blank" class="proj-link">https://googleweb.my ↗</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <div class="footer-brand">
+        <div class="nav-logo" style="width:24px;height:24px;font-size:11px;">A</div>
+        My Blog
+      </div>
+      <p class="footer-info">Muhammad Annas Fikri · annas.fikri003@gmail.com · 012 326 5737</p>
+    </div>
+    <div class="footer-right">
+      <h4 class="footer-contact-label">Contact Me · Social Media</h4>
+      <div class="footer-socials">
+        <a class="footer-chip" href="https://www.linkedin.com/in/annas-fikri" target="_blank">LinkedIn</a>
+        <a class="footer-chip" href="https://github.com/annasfikri003-cyber" target="_blank">GitHub</a>
+        <a class="footer-chip" href="https://wa.me/60123265737" target="_blank">WhatsApp</a>
+        <a class="footer-chip" href="mailto:annas.fikri003@gmail.com">Mail</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-top" id="backTop" title="Back to top">↑</button>
+
+  <script>
+    /* ============================================================
+       Annas Fikri — My Blog | script.js
+       ============================================================ */
+
+    /* ---------- PAGE NAVIGATION ---------- */
+    function showPage(pageId, btn) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(function(p) {
+        p.classList.remove('active');
+      });
+
+      // Deactivate all nav buttons
+      document.querySelectorAll('.nav-btn').forEach(function(b) {
+        b.classList.remove('active');
+      });
+
+      // Show selected page
+      document.getElementById(pageId).classList.add('active');
+
+      // Activate clicked button
+      btn.classList.add('active');
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Close mobile menu if open
+      document.querySelector('.nav-links').classList.remove('open');
+    }
+
+    /* ---------- INTERNSHIP TABS ---------- */
+    function showTab(tabId, btn) {
+      // Hide all tab contents
+      document.querySelectorAll('.itab-content').forEach(function(t) {
+        t.classList.remove('active');
+      });
+
+      // Deactivate all tab buttons
+      document.querySelectorAll('.itab').forEach(function(b) {
+        b.classList.remove('active');
+      });
+
+      // Show selected tab
+      document.getElementById(tabId).classList.add('active');
+
+      // Activate clicked tab button
+      btn.classList.add('active');
+    }
+
+    /* ---------- HAMBURGER MENU (MOBILE) ---------- */
+    var hamburger = document.getElementById('hamburger');
+    if (hamburger) {
+      hamburger.addEventListener('click', function() {
+        var navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('open');
+      });
+    }
+
+    /* ---------- BACK TO TOP BUTTON ---------- */
+    var backTopBtn = document.getElementById('backTop');
+
+    window.addEventListener('scroll', function() {
+      if (backTopBtn) {
+        if (window.scrollY > 300) {
+          backTopBtn.classList.add('visible');
+        } else {
+          backTopBtn.classList.remove('visible');
+        }
+      }
+    });
+
+    if (backTopBtn) {
+      backTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    /* ---------- SMOOTH PAGE TRANSITIONS ---------- */
+    document.addEventListener('DOMContentLoaded', function() {
+      // Make sure About page is shown on load
+      var aboutPage = document.getElementById('about');
+      if (aboutPage) {
+        aboutPage.classList.add('active');
+      }
+
+      // Close nav on outside click (mobile)
+      document.addEventListener('click', function(e) {
+        var navLinks = document.querySelector('.nav-links');
+        var ham = document.getElementById('hamburger');
+        if (navLinks && ham) {
+          if (!navLinks.contains(e.target) && !ham.contains(e.target)) {
+            navLinks.classList.remove('open');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
